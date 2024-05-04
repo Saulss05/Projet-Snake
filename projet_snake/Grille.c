@@ -31,7 +31,7 @@ void Grille_vider(struct grille*G){
     int i,j;
     for(i=0;i<G->n;i++){
         for (j=0;j<G->m;j++){
-            G->tab[i][j]="\\33[00m  ";
+            G->tab[i][j]="\33[00m  ";
         }
 
 	}
@@ -39,11 +39,11 @@ void Grille_vider(struct grille*G){
 
 void Grille_tirage_fruit(struct grille*G){
 	(G->fruit).x=rand()%(G->n);
-    (G->fruit).y=rand()%(G->m);
+        (G->fruit).y=rand()%(G->m);
 }
 
 void Grille_remplir(struct grille*G){
-	 G->tab[G->fruit.x][G->fruit.y]="\\33[41m  ";
+	 G->tab[G->fruit.x][G->fruit.y]="\33[41m  ";
 }
 
 void Grille_desallouer(struct grille*G){
@@ -60,24 +60,24 @@ void Grille_desallouer(struct grille*G){
 void Grille_redessiner(struct grille*G){
 	int i,j,k;
     for(k=0;k<G->m+2; k++)
-    printf("\\33[42m  ");
-    printf("\\33[00m");
+    printf("\33[44m  ");
+    printf("\33[00m");
     printf("\n");
     for(i=0;i<G->n; i++)
     {
-        printf("\\33[42m  ");
+        printf("\33[44m  ");
         for(j=0;j<G->m;j++)
         {
             printf("%s",G->tab[i][j]);
 
         }
-        printf("\\33[42m  ");
-        printf("\\33[00m  ");
+        printf("\33[44m  ");
+        printf("\33[00m  ");
         printf("\n");
     }
     for(k=0;k<G->m+2; k++)
-    printf("\\33[42m  ");
-    printf("\\33[00m  ");
+    printf("\33[44m  ");
+    printf("\33[00m  ");
     printf("\n");
 }
 
