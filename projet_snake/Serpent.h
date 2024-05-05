@@ -5,7 +5,7 @@
 
 struct serpent{
 	struct coord tete;
-	//struct liste_chaine corps;
+	struct liste *corps;
 };
 
 
