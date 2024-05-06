@@ -27,8 +27,4 @@ struct section *extraire_maillon_debut(struct liste *);
 
 void detruire_liste (struct liste **);
 
-
-#endif
-};
-	
 #endif
