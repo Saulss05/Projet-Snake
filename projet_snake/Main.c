@@ -2,6 +2,8 @@
 #include<time.h>
 #include<stdlib.h>
 #include"Grille.h"
+#include"Serpent.h"
+#include"Liste_Section.h"
 
 int main(int argc,char**argv){
 	srand(time(NULL));
