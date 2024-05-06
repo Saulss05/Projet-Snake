@@ -38,8 +38,8 @@ void Grille_vider(struct grille*G){
 }
 
 void Grille_tirage_fruit(struct grille*G){
-	(G->fruit).x=rand()%(G->n);
-        (G->fruit).y=rand()%(G->m);
+	(G->fruit).x=rand()%(G->n); // pas n-1? 
+        (G->fruit).y=rand()%(G->m);// si x et y == 0 ajouter fonction while 
 }
 
 void Grille_remplir(struct grille*G){
