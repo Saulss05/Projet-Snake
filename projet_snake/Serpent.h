@@ -1,13 +1,15 @@
 #ifndef _SERPENT_H
 #define _SERPENT_H
 #include"Grille.h"
-#include"Liste_Section.h"
+
 
 struct serpent{
 	struct coord tete;
 	struct liste *corps;
 };
 
+	
+void Grille_remplir_serpent(struct grille*,struct serpent*);
 
 
 #endif
