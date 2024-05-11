@@ -2,15 +2,26 @@
 #include<stdio.h>
 #include"Serpent.h"
 #include"Grille.h"
+#include"Liste_Section.h"
 		
+struct serpent * creer_serpent(int x , int y){
+	struct serpent * S = malloc(sizeof(struct serpent));
+	S->tete.x=x;
+	S->tete.y=y;
+	S->corps = nouvelle_liste();
+	return S;
+
+}		
 		
 void Grille_remplir_serpent(struct grille * G,struct serpent * S){
+
 	int i;
-	S->tete.x = G->n/2;
-	S->tete.y = G->m/2;
-	G->tab[S->tete.x][S->tete.y] = "\33[42m:p";
 	struct section *M=S->corps->premier;
 	struct coord dernier;
+	
+	
+	G->tab[S->tete.x][S->tete.y] = "\33[42m  ";
+	
 	dernier.x=S->tete.x;
 	dernier.y=S->tete.y;
 	while(M!=NULL){
