@@ -1,20 +1,18 @@
 #include<stdio.h>
 #include<time.h>
+#include<ncurses.h>
 #include<stdlib.h>
 #include"Grille.h"
 #include"Serpent.h"
-#include "Fonction_Jeu_1_serpent.h"
+#include"Fonction_Jeu_1_serpent.h"
 
 int main(int argc,char**argv){
 	srand(time(NULL));
 	int n;
 	int m;
-	
 	int temp;
-	int jeux;
-	
-	
-	if(argc!=5){
+	//int jeux;
+	if(argc!=4){
 		fprintf(stderr,"Erreur nombre d'arguments\n");
 		return EXIT_FAILURE;
 	}
