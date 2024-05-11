@@ -28,6 +28,7 @@ int main(int argc,char**argv){
 	Grille_tirage_fruit(G);
 	Grille_remplir(G);
 	Grille_remplir_serpent(G,S);
+	jeu(G,S);
 	Grille_redessiner(G);
 }	
 	
