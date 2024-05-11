@@ -1,26 +1,32 @@
+#include<ncurses.h>
 #include "Fonction_Jeu_1_serpent.h"
 #include "Serpent.h"
-#include<ncurses>
+#include"Grille.h"
+
+int gameover1(struct grille* G, struct serpent* S){
+	if ((S->tete.x < 0 || S->tete.y <0 || S->tete.x == G->n  || S->tete.y == G->m)){
+		return -1;
+	}
+	else{
+		return 0;
+	}
+}
 
 void jeu(struct grille* G, struct serpent* S){
 
-  int ch, ch_dern;
+  int ch,ch_dern;
 
   initscr();
   raw();
   keypad(stdscr, TRUE);
   noecho();
 
-  int temps;
+  int temps=1;
 
   halfdelay(temps);
   
 
-  int gameover1(struct Grille* G, struct serpent* S){
-	
-	if ((S->tete.x < 0 || S->tete.y <0 || S->tete.x == G->n 0 || S->tete.y == G->m) return -1;
-	
-  }
+  
 
 
 do{
@@ -32,6 +38,7 @@ do{
    if (ch==-1){ 
    
    	 S->tete.x++;
+   }
 
     else{
        
@@ -43,28 +50,29 @@ do{
         case KEY_UP:  
            S->tete.y--;
            if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y){
-           Grille_tirage_fruit(*G);
-           Grille_remplir(struct grille*G);
+           	Grille_tirage_fruit(G);
+           	Grille_remplir(G);
            }
            break;
         case KEY_DOWN: 
             S->tete.y++;
-            if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y)){
-           Grille_tirage_fruit(*G);
-           Grille_remplir(struct grille*G);
+            if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y){
+           	Grille_tirage_fruit(G);
+           	Grille_remplir(G);
            }
+           break;
         case KEY_LEFT: 
            S->tete.x--;
-           if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y)){
-           Grille_tirage_fruit(*G);
-           Grille_remplir(struct grille*G);
+           if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y){
+           	Grille_tirage_fruit(G);
+           	Grille_remplir(G);
            }
            break; 
         case KEY_RIGHT: 
            S->tete.x++;    
-           if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y)){
-           Grille_tirage_fruit(*G);
-           Grille_remplir(struct grille*G);
+           if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y){
+           	Grille_tirage_fruit(G);
+           	Grille_remplir(G);
            }           
            break;
         default:
@@ -73,10 +81,6 @@ do{
       
    fflush(stdout);  
    
-  } while ( gameover1(*G, *S)!= -1);
-
-    
-  endwin(); 
-
-
+  } while ( gameover1(G,S)!= -1);
+  	endwin(); 
 }
