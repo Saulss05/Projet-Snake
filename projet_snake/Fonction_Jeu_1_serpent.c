@@ -45,7 +45,8 @@ do{
       ch_dern=ch; /* on sauvegarde la dernière touche utilisee pour avoir le direction*/     
     
     }
-    
+    printf("\33[2J"); 
+    printf("\33[H");
     switch(ch_dern) {  
         case KEY_UP:  
            S->tete.y--;
