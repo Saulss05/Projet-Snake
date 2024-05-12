@@ -1,10 +1,10 @@
-#ifndef _SERPENT_H
-#define _SERPENT_H
+#ifndef _LISTE_SECTION_H
+#define _LISTE_SECTION_H
 
 struct section{
     int taille;
-    char* couleur; 
-    struct section*suivant;
+    char* couleur;
+    struct section *suivant;
 };
 
 struct liste{
@@ -23,8 +23,8 @@ void ajouter_section_debut(struct liste *, struct section *);
 
 void ajouter_section_queue(struct liste *, struct section *);
 
-struct section *extraire_maillon_debut(struct liste *);
+struct section *extraire_section_debut(struct liste *);
 
 void detruire_liste (struct liste **);
-
+	
 #endif
