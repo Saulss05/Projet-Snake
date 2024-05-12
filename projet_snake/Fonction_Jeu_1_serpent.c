@@ -1,10 +1,11 @@
 #include<ncurses.h>
 #include "Fonction_Jeu_1_serpent.h"
 #include "Serpent.h"
+#include<string.h>
 #include"Grille.h"
 
 int gameover1(struct grille* G, struct serpent* S){
-	if ((S->tete.x < 0 || S->tete.y <0 || S->tete.x == G->n  || S->tete.y == G->m)){
+	if (S->tete.x < 0 || S->tete.y <0 || S->tete.x == G->n  || S->tete.y == G->m || strcmp("\33[42m:p","\33[42m  ")==0){
 		return -1;
 	}
 	else{
@@ -16,7 +17,7 @@ void manger_fruit(struct serpent* S){
 	ajouter_section_queue(S->corps,Sec);
 }
 
-void jeu(struct grille* G, struct serpent* S){
+int jeu(struct grille* G, struct serpent* S){
 
   initscr();
   raw();
@@ -24,77 +25,72 @@ void jeu(struct grille* G, struct serpent* S){
   noecho();
 
   int car=KEY_RIGHT;
+  int est_fruit=1;
   int der_car=car;
+  ajouter_section_mvt_debut(S->mvt,creer_section_mvt(S->tete,4));
   
   printf("\33[2J"); 
   printf("\33[H");
     
   Grille_remplir_serpent(G,S);
-  Grille_redessiner(G);
   Grille_tirage_fruit(G);
   Grille_remplir(G);
+  Grille_redessiner(G);
   halfdelay(5);
 
 do{
-  
+    est_fruit=1;
     car = getch();
     
  
 
    if (car==-1){ 
-   
-   	 car=der_car;
+   	car=der_car;
    }
 
     else{
-       
-      car=car; /* on sauvegarde la dernière touche utilisee pour avoir le direction*/     
-    
+      	car=car; /* on sauvegarde la dernière touche utilisee pour avoir le direction*/     
     }
    
    
     switch(car) {  
+    
         case KEY_UP:  
-           if(gameover1(G,S)==-1){
-           	endwin();
-           	printf("Vous avez perdu\n");
-           }
-           S->tete.y--;
+           ajouter_section_mvt_debut(S->mvt,creer_section_mvt(S->tete,1));
+           S->tete.x--;
            der_car=KEY_UP;
            if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y){
+           	est_fruit=0;
            	manger_fruit(S);
            }
            break;
+           
         case KEY_DOWN: 
-            if(gameover1(G,S)==-1){
-           	endwin();
-           	printf("Vous avez perdu\n");
-           }	
-            S->tete.y++;
+            ajouter_section_mvt_debut(S->mvt,creer_section_mvt(S->tete,3));
+            S->tete.x++;
             der_car=KEY_DOWN;
             if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y){
+            	est_fruit=0;
            	manger_fruit(S);
            }
            break;
+           
         case KEY_LEFT: 
-           if(gameover1(G,S)==-1){
-           	endwin();
-           	printf("Vous avez perdu\n");
-           }
-           S->tete.x--;
+           ajouter_section_mvt_debut(S->mvt,creer_section_mvt(S->tete,4));
+           S->tete.y--;
            der_car=KEY_LEFT;
            if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y){
+           	est_fruit=0;
            	manger_fruit(S);
            }
            break; 
+           
         case KEY_RIGHT: 
-           if(gameover1(G,S)==-1){
-           	endwin();
-           	printf("Vous avez perdu\n");
-           }
-           S->tete.x++;   
+           ajouter_section_mvt_debut(S->mvt,creer_section_mvt(S->tete,2));
+           S->tete.y++;   
            der_car=KEY_RIGHT; 
            if(S->tete.x == G->fruit.x && S->tete.y == G->fruit.y){
+           	est_fruit=0;
            	manger_fruit(S);
            }           
            break;
@@ -103,20 +99,19 @@ do{
       }
       
    fflush(stdout);  
-   Grille_vider(G);
-   Grille_remplir_serpent(G,S);
-   Grille_remplir(G);
+   Grille_redessiner(G);
    printf("\33[2J"); 
    printf("\33[H");
-   Grille_redessiner(G);
+   Grille_vider(G);
+   if(est_fruit!=1){
+   	Grille_tirage_fruit(G);
+   }
+   Grille_remplir(G);
+   Grille_remplir_serpent(G,S);
    
   } while ( gameover1(G,S)!= -1);
-  endwin(); 
+  endwin();
+  return 1; 
 
 
-}
-   fflush(stdout);  
-   
-  } while ( gameover1(G,S)!= -1);
-  	endwin(); 
 }
