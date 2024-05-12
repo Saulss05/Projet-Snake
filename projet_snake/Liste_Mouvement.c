@@ -1,23 +1,27 @@
+#include"Liste_Mouvement.h"
+#include<stdio.h>
+#include<stdlib.h>
 
-struct maillon *creer_maillon (struct coord coord,unsigned direction) {
-  struct maillon *m = malloc(sizeof(struct maillon));
-  m->coord.x = coord.x;
-  m->coord.y = coord.y;
-  m->direction=direction;
-  m->suivant = NULL;
-  return m;
+
+struct section_mvt *creer_section_mvt(struct coord coord,int direction) {
+  struct section_mvt *s = malloc(sizeof(struct section_mvt));
+  s->coord.x = coord.x;
+  s->coord.y = coord.y;
+  s->direction=direction;
+  s->suivant = NULL;
+  return s;
 }
 
 
-void detruire_maillon (struct maillon *m) {
-  if (m != NULL) {
-    free(m);
-    m = NULL;
+void desallouer_section_mvt(struct section_mvt *s) {
+  if (s != NULL) {
+    free(s);
+    s = NULL;
   }
 }
 
-struct liste_mouvement *nouvelle_liste_mouvement() {
-  struct liste_mouvement *l = malloc(sizeof(struct liste_mouvement));
+struct liste_mvt *nouvelle_liste_mvt() {
+  struct liste_mvt *l = malloc(sizeof(struct liste_mvt));
   l->premier = NULL;
   l->dernier = NULL;
   l->longueur = 0;
@@ -25,31 +29,33 @@ struct liste_mouvement *nouvelle_liste_mouvement() {
 }
 
 
-void ajouter_maillon_debut_liste(struct liste_mouvement *l, struct maillon *m) {
-  if (l->longueur==0) {  l->dernier = m; }
-  m->suivant = l->premier;
-  l->premier = m;
+void ajouter_section_mvt_debut(struct liste_mvt *l, struct section_mvt *s) {
+  if (l->longueur==0) {  
+  	l->dernier = s; 
+  }
+  s->suivant = l->premier;
+  l->premier = s;
   ++l->longueur;
 }
 
 
-struct maillon *extraire_maillon_debut_liste(struct liste_mouvement *l) {
-  struct maillon *m = l->premier;
-  if (m != NULL) {
-    l->premier = m->suivant;
+struct section_mvt *extraire_section_mvt_debut(struct liste_mvt *l) {
+  struct section_mvt *s = l->premier;
+  if (s != NULL) {
+    l->premier = s->suivant;
     --l->longueur;
     if (l->longueur==0) { l->dernier = NULL; }
-    m->suivant = NULL;
+    s->suivant = NULL;
   }
-  return m;
+  return s;
 }
 
 
-void detruire_liste_mouvement (struct liste_mouvement *l) {
+void detruire_liste_mvt (struct liste_mvt *l) {
   if (l != NULL) {
     while ((l)->longueur!=0) {
-      struct maillon *m = extraire_maillon_debut_liste(l);
-      detruire_maillon(m);
+      struct section_mvt *s = extraire_section_mvt_debut(l);
+      desallouer_section_mvt(s);
     }
     free(l);
     l = NULL;
@@ -57,17 +63,16 @@ void detruire_liste_mouvement (struct liste_mouvement *l) {
 }
  
  
-void ajouter_maillon_fin_liste(struct liste_mouvement *l,struct maillon *m)
-{
-  m->suivant=NULL;
+void ajouter_section_mvt_queue(struct liste_mvt *l,struct section_mvt *s){
+  s->suivant=NULL;
 	if(l->longueur==0)
 	{
-    l->premier=m;
+    l->premier=s;
 	}
 	else
 	{
-    l->dernier->suivant=m;
+    l->dernier->suivant=s;
 	}
   l->longueur++;
-  l->dernier=m;
+  l->dernier=s;
 }
