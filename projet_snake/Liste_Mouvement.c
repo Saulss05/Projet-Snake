@@ -45,24 +45,6 @@ struct maillon *extraire_maillon_debut_liste(struct liste_mouvement *l) {
 }
 
 
-struct maillon *extraire_maillon_fin_liste(struct liste_mouvement *l) {
-  struct maillon *m = l->premier, *res;
-  if (m == NULL) {  return m; }
-  --l->longueur;
-  if (m->suivant == NULL) {
-    l->premier = NULL;
-    l->dernier = NULL;
-    return m;
-  }
-  while (m->suivant->suivant != NULL) {
-    m = m->suivant;
-  }
-  l->dernier = m;
-  res = m->suivant;
-  m->suivant = NULL;
-  return res;
-}
-
 void detruire_liste_mouvement (struct liste_mouvement *l) {
   if (l != NULL) {
     while ((l)->longueur!=0) {
