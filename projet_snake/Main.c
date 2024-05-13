@@ -11,9 +11,7 @@ int main(int argc,char**argv){
 	srand(time(NULL));
 	int n;
 	int m;
-	int taille=4;
-	char*couleur="\33[42m  ";
-	int temps;
+	int vitesse;
 	char*jeux;
 	
 	if(argc!=5){
@@ -26,8 +24,7 @@ int main(int argc,char**argv){
 		return EXIT_FAILURE;
 		}		
 		
-	temps=atoi(argv[3]);
-	halfdelay(temps);
+	vitesse=atoi(argv[3]);
 	n=atoi(argv[1]);
 	m=atoi(argv[2]);
 	
@@ -41,7 +38,7 @@ int main(int argc,char**argv){
 	//ajouter_section_debut(Snake->corps,Sec);
 	//Grille_remplir_serpent(G,Snake);
 	//Grille_redessiner(G);
-	if(jeu(G,Snake)==1){
+	if(jeu(G,Snake,vitesse)==1){
 		printf("GAMEOVER\n");
 	}
 	//Grille_desallouer(G);

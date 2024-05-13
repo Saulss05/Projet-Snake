@@ -13,12 +13,6 @@ struct serpent * creer_serpent(int x,int y){
 	return S;
 }		
 
-/*char*generer_couleur(){
-	char*couleur=malloc(sizeof(char)*8);
-	return couleur;
-}*/
-
-
 
 
 void Grille_remplir_serpent(struct grille * G,struct serpent * S){
@@ -29,7 +23,6 @@ void Grille_remplir_serpent(struct grille * G,struct serpent * S){
 	G->tab[S->tete.x][S->tete.y] = "\33[42m:p";
 	dernier.x=S->tete.x;
 	dernier.y=S->tete.y;
-	//M->couleur=generer_couleur();
 	while(M!=NULL){
 		switch(Sec->direction){
 		

@@ -14,7 +14,6 @@ struct serpent{
 
 struct serpent * creer_serpent(int x,int y);
 	
-//char*generer_couleur();
 
 void Grille_remplir_serpent(struct grille*G ,struct serpent*S);
 

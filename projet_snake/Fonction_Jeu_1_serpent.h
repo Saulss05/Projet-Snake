@@ -3,14 +3,10 @@
 #include"Grille.h"
 #include "Serpent.h"
 
-void jeu(struct grille* G, struct serpent* S);
+int jeu(struct grille* G, struct serpent* S,int vitesse);
 
 int gameover1(struct grille* G, struct serpent* S);
 
 void manger_fruit(struct serpent* S);
 
 #endif
-
-
-
-

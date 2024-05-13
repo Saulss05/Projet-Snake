@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<time.h>
-#include<stdlib.h>
 #include"Liste_Section.h"
+#include<stdio.h>
+#include<stdlib.h>
+
 
 struct section *creer_section (int t,char*c) {
   struct section *s = malloc(sizeof(struct section));
@@ -34,6 +34,29 @@ void ajouter_section_debut(struct liste *l, struct section *s) {
   s->suivant = l->premier;
   l->premier = s;
   ++l->longueur;
+  /*switch(l->premier->direction){
+  	case 1:
+  		s->x=l->premier->x;
+  		s->y=l->premier->y;
+  		l->premier->x=l->premier->x -1;
+  		break;
+  	case 2: 
+  		s->x=l->premier->x;
+  		s->y=l->premier->y;
+  		l->premier->y=l->premier->y +1;
+  		break;
+  	case 3: 
+  		s->x=l->premier->x;
+  		s->y=l->premier->y;
+  		l->premier->x=l->premier->y +1;
+  		break;
+  	case 4: 
+  		s->x=l->premier->x;
+  		s->y=l->premier->y;
+  		l->premier->y=l->premier->y -1;
+  		break;
+  }
+  */
 }
 
 void ajouter_section_queue(struct liste *l, struct section*s) {
