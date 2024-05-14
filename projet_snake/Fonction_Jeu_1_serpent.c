@@ -6,6 +6,8 @@
 #include"Grille.h"
 
 void menu(){
+	printf("\33[2J"); 
+   	printf("\33[H");
 	printf("\33[31m _______      _______    _________________     _____    ______    _______    _______ \n");
   	printf("\33[31m|            /       |  |                 |   |     |  /      |  |       |  |       |\n");
   	printf("\33[31m|           /        |  |     ____________|   |     | /       |  |       |  |       |\n");
@@ -16,14 +18,21 @@ void menu(){
   	printf("\33[31m|       |    |       |  |    |___________     |       / |     |  |       |__|       |\n");
   	printf("\33[31m|       |    |       |  |                |    |      /  |     |  |                  |\n");
   	printf("\33[31m|_______|    |_______|  |________________|    |_____/   |_____|  |__________________|\n");
+	printf("\33[39mChoisissez un jeu parmi les jeux suivants:\n\r ");
+	printf("\33[32m[1] snake\n\r ");
+	printf("\33[35m[2] GTA6\n\r ");
+	printf("\33[93m[3] tetris\n\r ");
+	printf("\33[39m\n");
 }
 
 
 
 
 int gameover1(struct grille* G, struct serpent* S){
-	if (S->tete.x < 0 || S->tete.y <0 || S->tete.x == G->n  || S->tete.y == G->m || (strcmp(G->tab[S->tete.x][S->tete.y],"\33[42m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[43m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[44m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[45m  ")==0|| strcmp(G->tab[S->tete.x][S->tete.y],"\33[46m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[47m  ")==0)){
+	if (S->tete.x < 0 || S->tete.y <0 || S->tete.x == G->n  || S->tete.y == G->m || strcmp(G->tab[S->tete.x][S->tete.y],"\33[102m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[103m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[104m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[105m  ")==0|| strcmp(G->tab[S->tete.x][S->tete.y],"\33[106m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[107m  ")==0){
+		G->tab[S->mvt->premier->coord.x][S->mvt->premier->coord.y] = "\33[42mX)";
 		return -1;
+		
 	}
 	else{
 		return 0;
@@ -31,12 +40,12 @@ int gameover1(struct grille* G, struct serpent* S){
 }
 
 char*generer_couleur(){
-	int nb= 42 +rand()%6;
-	char*couleur=(char*)malloc(sizeof(char)*8);
+	int nb= 101 +rand()%7;
+	char*couleur=(char*)malloc(sizeof(char)*9);
 	if (couleur==NULL){
 		fprintf(stderr,"Impossible allouer memoire\n");
 	}
-	snprintf(couleur,8,"\33[%dm  ",nb);
+	snprintf(couleur,9,"\33[%dm  ",nb);
 	return couleur;
 }
 
@@ -166,7 +175,7 @@ do{
    if(est_fruit!=1){
    	do{
    		Grille_tirage_fruit(G);
-   	}while(strcmp(G->tab[G->fruit.x][G->fruit.y],"\33[42m:p")==0 || strcmp(G->tab[G->fruit.x][G->fruit.y],S->corps->premier->couleur)==0);
+   	}while(strcmp(G->tab[G->fruit.x][G->fruit.y],"\33[42m:p")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[102m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[103m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[104m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[105m  ")==0|| strcmp(G->tab[S->tete.x][S->tete.y],"\33[106m  ")==0 || strcmp(G->tab[S->tete.x][S->tete.y],"\33[107m  ")==0);
    }
    Grille_remplir(G);
    Grille_remplir_serpent(G,S);
@@ -174,7 +183,9 @@ do{
   } while ( gameover1(G,S)!= -1);
   endwin();
   //Grille_desallouer(G);
-  printf("\33[37mVotre score est:%d\n", score);
+  printf("\33[2J"); 
+  printf("\33[H");
+  printf("\33[39mVotre score est:%d\n", score);
   if(score<=3){
 		printf("Même Cristophe Tollu ferait mieux que vous frr mdr XD\n");
 	}
@@ -192,31 +203,3 @@ do{
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
