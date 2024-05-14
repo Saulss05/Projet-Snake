@@ -9,4 +9,8 @@ int gameover1(struct grille* G, struct serpent* S);
 
 void manger_fruit(struct serpent* S);
 
+void score(struct grille* G, struct serpent* S);
+
+void menu();
+
 #endif

@@ -55,6 +55,7 @@ void Grille_desallouer(struct grille*G){
 		}
 		free(G->tab[i]);
 	}
+	free(G->tab);
 	free(G);
 }
 

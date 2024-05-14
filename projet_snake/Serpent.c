@@ -32,7 +32,6 @@ void Grille_remplir_serpent(struct grille * G,struct serpent * S){
 					G->tab[dernier.x][dernier.y]=M->couleur;
 					if (dernier.x==Sec->coord.x && dernier.y==Sec->coord.y){
 						Sec=Sec->suivant;
-						break;
 					}
 				}
 				break;
@@ -43,7 +42,6 @@ void Grille_remplir_serpent(struct grille * G,struct serpent * S){
 					G->tab[dernier.x][dernier.y]=M->couleur;
 					if (dernier.x==Sec->coord.x && dernier.y==Sec->coord.y){
 						Sec=Sec->suivant;
-						break;
 					}
 				}
 				break;
@@ -54,7 +52,6 @@ void Grille_remplir_serpent(struct grille * G,struct serpent * S){
 					G->tab[dernier.x][dernier.y]=M->couleur;
 					if (dernier.x==Sec->coord.x && dernier.y==Sec->coord.y){
 						Sec=Sec->suivant;
-						break;
 					}
 				}
 				break;
@@ -65,7 +62,6 @@ void Grille_remplir_serpent(struct grille * G,struct serpent * S){
 					G->tab[dernier.x][dernier.y]=M->couleur;
 					if (dernier.x==Sec->coord.x && dernier.y==Sec->coord.y){
 						Sec=Sec->suivant;
-						break;
 					}
 				}
 				break;
