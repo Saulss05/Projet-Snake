@@ -7,7 +7,7 @@
 #include"Serpent.h"
 #include"Fonction_Jeu_1_serpent.h"
 
-int main(int argc,char**argv){
+int main(){
 	srand(time(NULL));
 	int n;
 	int m;
