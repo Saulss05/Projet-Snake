@@ -107,8 +107,12 @@ void manger_fruit2(struct serpent* S){
 
 int gameover2(struct grille* G, struct serpent* S){
 	if (S->tete.x < 0 || S->tete.y <0 || S->tete.x == G->n  || S->tete.y == G->m || strcmp(G->tab[S->tete.x][S->tete.y],"\33[44m  ")==0){
-		G->tab[S->mvt->premier->coord.x][S->mvt->premier->coord.y] = "\33[42mX)";
-		return -1;
+		if(strcmp(S->corps->premier->couleur,"\33[40m  ")==0){
+			G->tab[S->mvt->premier->suivant->coord.x][S->mvt->premier->suivant->coord.y] = "\33[42m:D";
+			return -1;
+		}
+			G->tab[S->mvt->premier->suivant->coord.x][S->mvt->premier->suivant->coord.y] = "\33[42mX)";
+			return -1;
 		
 	}
 	else{
@@ -190,6 +194,5 @@ do{
 
 
 }
-
 
 
